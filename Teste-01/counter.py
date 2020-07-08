@@ -66,9 +66,17 @@ pts_L4 = pts_L4.reshape((-1,1,2))
 fgbg = cv2.createBackgroundSubtractorMOG2(detectShadows = True)
 
 #Structuring elements for morphographic filters
+#kernelOp = np.ones((3,3),np.uint8)
+#kernelOp2 = np.ones((11,11),np.uint8)
+#kernelCl = np.ones((11,11),np.uint8)
+
 kernelOp = np.ones((3,3),np.uint8)
+kernelOp1 = np.ones((7,7),np.uint8)
 kernelOp2 = np.ones((5,5),np.uint8)
+
 kernelCl = np.ones((11,11),np.uint8)
+kernelCl1 = np.ones((20,20),np.uint8)
+kernelCl2 = np.ones((25,25),np.uint8)
 
 #Variables
 font = cv2.FONT_HERSHEY_SIMPLEX
@@ -79,10 +87,12 @@ pid = 1
 val = []
 
 while(cap.isOpened()):
-    for image in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
-    
-    ret, frame = cap.read()
-##    frame = image.array
+    #for image in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+
+    ret, frame1 = cap.read()
+    frame = cv2.UMat()
+    frame = cv2.transpose(frame1,frame)
+    #frame = image.array
 
     # for i in persons:
     #     print i.age_one() #age every person one frame
@@ -98,11 +108,11 @@ while(cap.isOpened()):
         ret,imBin= cv2.threshold(fgmask,200,255,cv2.THRESH_BINARY)
         ret,imBin2 = cv2.threshold(fgmask2,200,255,cv2.THRESH_BINARY)
         #Opening (erode->dilate) to remove noise.
-        mask = cv2.morphologyEx(imBin, cv2.MORPH_OPEN, kernelOp)
-        mask2 = cv2.morphologyEx(imBin2, cv2.MORPH_OPEN, kernelOp)
+        mask = cv2.morphologyEx(imBin, cv2.MORPH_OPEN, kernelOp1)
+        mask2 = cv2.morphologyEx(imBin2, cv2.MORPH_OPEN, kernelOp2)
         #Closing (dilate -> erode) to join white regions.
-        mask =  cv2.morphologyEx(mask , cv2.MORPH_CLOSE, kernelCl)
-        mask2 = cv2.morphologyEx(mask2, cv2.MORPH_CLOSE, kernelCl)
+        mask =  cv2.morphologyEx(mask , cv2.MORPH_CLOSE, kernelCl1)
+        mask2 = cv2.morphologyEx(mask2, cv2.MORPH_CLOSE, kernelCl2)
     except:
         print('EOF')
         print ('UP:',cnt_up+count_up)
@@ -274,7 +284,7 @@ while(cap.isOpened()):
     k = cv2.waitKey(30) & 0xff
     if k == 27:
         break
-#END while(cap.isOpened())
+
     
 #################
 #   CLOSING    #
