@@ -1,0 +1,10 @@
+[DEFAULT]
+PHYSICAL_AREA = lnu/classrooms
+MONGODB_SERVER = localhost
+MONGODB_PORT = 27017
+MONGODB_USERNAME = <username>
+MONGODB_PASSWORD = <password>
+MQTT_SERVER = localhost
+MQTT_PORT = 1883
+REDIS_SERVER = localhost
+REDIS_PORT = 6379

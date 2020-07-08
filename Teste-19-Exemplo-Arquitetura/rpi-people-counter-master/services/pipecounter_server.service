@@ -1,0 +1,10 @@
+ [Unit]
+ Description=piPeCounter Server Service
+ After=multi-user.target monitor_mode.service
+
+ [Service]
+ Type=idle
+ ExecStart=/bin/bash ~/deploy-folder/scripts/1_run_server.sh
+
+ [Install]
+ WantedBy=multi-user.target

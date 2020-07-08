@@ -1,0 +1,10 @@
+ [Unit]
+ Description=Starts Monitor Mode
+ After=multi-user.target network.target
+
+ [Service]
+ Type=idle
+ ExecStart=/bin/bash ~/deploy-folder/scripts/start_monitor_mode.sh
+
+ [Install]
+ WantedBy=multi-user.target

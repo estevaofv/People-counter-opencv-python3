@@ -1,0 +1,46 @@
+#
+# Copyright © 2019 VMware, Inc. All Rights Reserved.
+#
+# SPDX-License-Identifier: BSD-2-Clause
+#
+---
+- name: install packages
+  apt: 
+    name: "{{ packages }}"
+    update_cache: yes 
+    state: latest
+  vars:
+    packages:
+      - python3
+      - python3-pip
+
+- name: install python dependencies
+  pip:
+    name: 
+    - paho-mqtt==1.5.0
+    - minio==5.0.5
+    - boto3==1.10.29
+    - opencv-python==4.2.0.32
+
+- name: Add the user '{{ http_image_folder_owner }}' with the primary group of {{ http_image_folder_group }}
+  user:
+    name: "{{ http_image_folder_owner }}"
+    state: present
+    comment: IoT Admin
+    group: "{{ http_image_folder_group }}"
+
+- name: create folder to cache images
+  file:
+    path: "{{ http_image_folder }}"
+    owner: "{{ http_image_folder_owner }}"
+    group: "{{ http_image_folder_group }}"
+    state: directory
+    mode: '0755'
+
+- name: create S3 bucket
+  s3_bucket:
+    name: "{{ s3_bucket_name }}"
+    aws_access_key: "{{ s3_access_key }}"
+    aws_secret_key: "{{ s3_secret_key }}"
+    s3_url: "{{ s3_url }}"
+    state: present

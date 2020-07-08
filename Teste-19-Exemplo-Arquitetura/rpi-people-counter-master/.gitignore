@@ -1,0 +1,29 @@
+# Dependency directories
+node_modules/
+
+# dotenv environment variables file
+.env
+.env.test
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# VS Code stuff
+.vscode/
+
+# Python
+*.pyc
+
+# Configs
+config.ini
+config.json
+
+# Scripts
+#*_run_*.sh
+
+### Redis ###
+# Ignore redis binary dump (dump.rdb) files
+*.rdb

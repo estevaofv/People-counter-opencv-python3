@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>piPeCounter</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.4/dist/semantic.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+</head>
+
+<body>
+  <!-- Header -->
+  <div class="ui basic segment inverted">
+    <div class="ui text container">
+      <h1 class="ui header inverted">
+        piPeCounter
+        <div class="sub header inverted">
+          A Raspberry Pi people counter
+        </div>
+      </h1>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="ui container">
+    <div class="ui stackable internally celled two column grid">
+
+      <!-- Left column -->
+      <div class="five wide tablet four wide computer column">
+        <h3 class="ui header">People estimate</h3>
+        <div class="ui center aligned grid">
+          <div class="column loaderContainer">
+            <div class="ui statistic">
+              <div class="label" id="pplTopTxt"></div>
+              <div class="value" id="pplValue"></div>
+              <div class="label" id="pplBottomTxt"></div>
+            </div>
+            <div class="ui text slow loader active">Loading</div>
+          </div>
+        </div>
+
+        <div class="ui center aligned grid">
+          <div class="column">
+            <div class="ui toggle checkbox">
+              <input type="checkbox" name="public">
+              <label>Correction</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="ui divider"></div>
+
+        <div class="ui raised segment">
+          <a class="ui blue ribbon label" id="corrTxtHeader">Correction</a>
+          <p>With correction, the average number of people in the country who do not own a smartphone are taken into
+            consideration.</p>
+        </div>
+
+        <h4 class="ui header">Correction country</h4>
+
+        <div class="ui fluid selection dropdown">
+          <input type="hidden" name="country" value="0.9">
+          <i class="dropdown icon"></i>
+          <div class="default text">
+            <i class="se flag"></i>
+            <span class="ui black text">Sweden (10%)</span>
+          </div>
+          <div class="menu">
+            <!-- https://www.statista.com/statistics/321477/smartphone-user-penetration-in-australia
+                         Accessed: 2019-04-08 -->
+            <div class="item" data-value="0.72"><i class="au flag"></i>Australia (28%)</div>
+
+            <!-- https://2018.svenskarnaochinternet.se/allmant-om-internetutvecklingen/smarta-mobiler-fortsatter-oka
+                         Accessed: 2019-04-08 -->
+            <div class="item" data-value="0.9"><i class="se flag"></i>Sweden (10%)</div>
+
+            <!-- https://www.pewinternet.org/fact-sheet/mobile
+                         Accessed: 2019-04-08 -->
+            <div class="item" data-value="0.77"><i class="us flag"></i>U.S (23%)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right column -->
+      <div class="eleven wide tablet twelve wide computer column">
+        <div class="ui grid">
+
+          <!-- Live chart -->
+          <div class="row">
+            <div class="column">
+              <h3 class="ui header">The number of devices in real-time detected</h3>
+              <div class="chartContainer">
+                <canvas id="liveChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="ui divider"></div>
+
+          <!-- Pie chart -->
+          <div class="column row">
+            <div class="sixteen wide mobile twelve wide tablet nine wide computer column">
+              <h3 class="ui header">Overall detection rate of Bluetooth vs WiFi</h3>
+              <div class="chartContainer">
+                <canvas id="pieChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="ui divider"></div>
+    <div class="ui center aligned column grid">
+      <div class="column">
+        Source code available at <a href="https://github.com/AlexNaga/rpi-people-counter">GitHub</a>
+        <p><span class="ui small text">Alex Naga, 2019</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.4/dist/semantic.min.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+</body>
+
+</html>

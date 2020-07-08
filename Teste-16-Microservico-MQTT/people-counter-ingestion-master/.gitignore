@@ -1,0 +1,12 @@
+# Ignore auto-generated python files
+*.pyc
+__pycache__/
+
+# Generated Mac files
+.DS_Store
+
+# Generated Pulse package CLI files
+*.iotcp
+
+# Credentials file for the application
+people-counter-ingestion.conf
